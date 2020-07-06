@@ -37,8 +37,10 @@ public class Configs implements IConfigHandler
         public static final ConfigInteger       EASY_PLACE_MODE_RANGE_X = new ConfigInteger(    "easyPlaceModeRangeX", 3, 0, 12, "X Range for EasyPlace");
         public static final ConfigInteger       EASY_PLACE_MODE_RANGE_Y = new ConfigInteger(    "easyPlaceModeRangeY", 3, 0, 12, "Y Range for EasyPlace");
         public static final ConfigInteger       EASY_PLACE_MODE_RANGE_Z = new ConfigInteger(    "easyPlaceModeRangeZ", 3, 0, 12, "Z Range for EasyPlace");
-        public static final ConfigInteger       EASY_PLACE_MODE_MAX_BLOCKS= new ConfigInteger(    "easyPlaceModeMaxBlocks", 3, 1, 1000000, "Max block interactions per cycle");
-        public static final ConfigBoolean       EASY_PLACE_MODE_BREAK_BLOCKS= new ConfigBoolean(    "easyPlaceModeBreakBlocks", false, "Automatically breaks blocks. Currently only works in Creative.");
+        public static final ConfigInteger       EASY_PLACE_MODE_MAX_BLOCKS= new ConfigInteger(  "easyPlaceModeMaxBlocks", 3, 1, 1000000, "Max block interactions per cycle");
+        public static final ConfigBoolean       EASY_PLACE_MODE_BREAK_BLOCKS= new ConfigBoolean("easyPlaceModeBreakBlocks", false, "Automatically breaks blocks. Currently only works in Creative.");
+        public static final ConfigBoolean       EASY_PLACE_MODE_ACCURATE= new ConfigBoolean(    "easyPlaceModeAccurate", false, "Uses the accurate block placement API from carpet extra.");
+        
         public static final ConfigBoolean       EXECUTE_REQUIRE_TOOL    = new ConfigBoolean(    "executeRequireHoldingTool", true, "Require holding an enabled tool item\nfor the executeOperation hotkey to work");
         public static final ConfigBoolean       FIX_RAIL_ROTATION       = new ConfigBoolean(    "fixRailRotation", true, "If true, then a fix is applied for the vanilla bug in rails,\nwhere the 180 degree rotations of straight north-south and\neast-west rails rotate 90 degrees counterclockwise instead >_>");
         public static final ConfigBoolean       LOAD_ENTIRE_SCHEMATICS  = new ConfigBoolean(    "loadEntireSchematics", false, "If true, then the entire schematic is always loaded at once.\nIf false, then only the part that is within the client's view distance is loaded.");
@@ -66,6 +68,7 @@ public class Configs implements IConfigHandler
                 EASY_PLACE_MODE_RANGE_Z,
                 EASY_PLACE_MODE_MAX_BLOCKS,
                 EASY_PLACE_MODE_BREAK_BLOCKS,
+                EASY_PLACE_MODE_ACCURATE,
                 EXECUTE_REQUIRE_TOOL,
                 FIX_RAIL_ROTATION,
                 LOAD_ENTIRE_SCHEMATICS,
