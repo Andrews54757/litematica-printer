@@ -469,7 +469,7 @@ public class Printer {
                                 .getFirstPropertyFacingValue(stateSchematic);
                         if (facing != null) {
                             FacingData facedata = getFacingData(stateSchematic);
-                            if (!canPlaceFace(facedata, stateSchematic, mc.player, primaryFacing, horizontalFacing))
+                            if (!Configs.Generic.EASY_PLACE_MODE_ACCURATE.getBooleanValue() && !canPlaceFace(facedata, stateSchematic, mc.player, primaryFacing, horizontalFacing))
                                 continue;
 
                             if ((stateSchematic.getBlock() instanceof DoorBlock
