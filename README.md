@@ -1,3 +1,8 @@
+# DISCLAIMER
+This hasn't been updated in a while, and probably has some problems. I suggest you just use litematica without the printer if you can. Also, please don't bother Masa (Maruohon) about adding a printer, he gets asked that question [a lot](https://github.com/maruohon/litematica/issues/25).
+
+Will I update this to 1.16.2? Probably not.
+
 Litematica Printer
 ==============
 Litematica is a client-side Minecraft mod using LiteLoader.
