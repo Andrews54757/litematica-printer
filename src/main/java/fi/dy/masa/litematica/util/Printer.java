@@ -66,6 +66,7 @@ import net.minecraft.client.MinecraftClient;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.item.ItemStack;
+import net.minecraft.network.packet.c2s.play.PlayerMoveC2SPacket;
 import net.minecraft.text.Text;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
@@ -166,7 +167,7 @@ public class Printer {
 
         World world = SchematicWorldHandler.getSchematicWorld();
 
-        ItemStack stack = MaterialCache.getInstance().getItemForState(preference, world, pos);
+        ItemStack stack = MaterialCache.getInstance().getRequiredBuildItemForState(preference, world, pos);
 
         if (stack.isEmpty() == false) {
             PlayerInventory inv = mc.player.inventory;
@@ -458,7 +459,7 @@ public class Printer {
                         continue;
                     }
 
-                    ItemStack stack = MaterialCache.getInstance().getItemForState(stateSchematic);
+                    ItemStack stack = MaterialCache.getInstance().getRequiredBuildItemForState(stateSchematic);
                     if (stack.isEmpty() == false && (mc.player.abilities.creativeMode || mc.player.inventory.getSlotWithStack(stack) != -1)) {
 
                         if (stateSchematic == stateClient) {
