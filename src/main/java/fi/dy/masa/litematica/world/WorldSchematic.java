@@ -22,17 +22,18 @@ import net.minecraft.recipe.RecipeManager;
 import net.minecraft.scoreboard.Scoreboard;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvent;
-import net.minecraft.tag.RegistryTagManager;
+import net.minecraft.tag.TagManager;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.profiler.Profiler;
+import net.minecraft.util.registry.DynamicRegistryManager;
 import net.minecraft.world.LightType;
 import net.minecraft.world.MutableWorldProperties;
 import net.minecraft.world.TickScheduler;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.Biome;
-import net.minecraft.world.biome.Biomes;
+import net.minecraft.world.biome.BuiltinBiomes;
 import net.minecraft.world.chunk.Chunk;
 import net.minecraft.world.chunk.ChunkStatus;
 import net.minecraft.world.chunk.WorldChunk;
@@ -51,7 +52,7 @@ public class WorldSchematic extends World
 
     protected WorldSchematic(MutableWorldProperties mutableWorldProperties, DimensionType dimensionType, Supplier<Profiler> supplier)
     {
-        super(mutableWorldProperties, null, null, dimensionType, supplier, true, true, 0L);
+        super(mutableWorldProperties, null, dimensionType, supplier, true, true, 0L);
 
         this.mc = MinecraftClient.getInstance();
         this.worldRenderer = LitematicaRenderer.getInstance().getWorldRenderer();
@@ -107,7 +108,7 @@ public class WorldSchematic extends World
     @Override
     public Biome getGeneratorStoredBiome(int biomeX, int biomeY, int biomeZ)
     {
-        return Biomes.PLAINS;
+        return BuiltinBiomes.PLAINS;
     }
 
     @Override
@@ -226,7 +227,7 @@ public class WorldSchematic extends World
     }
 
     @Override
-    public RegistryTagManager getTagManager()
+    public TagManager getTagManager()
     {
         return this.mc.world != null ? this.mc.world.getTagManager() : null;
     }
@@ -361,5 +362,11 @@ public class WorldSchematic extends World
     public void playSoundFromEntity(@Nullable PlayerEntity player, Entity entity, SoundEvent sound, SoundCategory category, float volume, float pitch)
     {
         // NO-OP
+    }
+
+    @Override
+    public DynamicRegistryManager getRegistryManager()
+    {
+        return this.mc.world.getRegistryManager();
     }
 }

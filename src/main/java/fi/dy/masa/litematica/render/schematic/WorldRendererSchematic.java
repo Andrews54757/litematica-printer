@@ -91,10 +91,10 @@ public class WorldRendererSchematic
     public WorldRendererSchematic(MinecraftClient mc)
     {
         this.mc = mc;
-        this.entityRenderDispatcher = mc.getEntityRenderManager();
+        this.entityRenderDispatcher = mc.getEntityRenderDispatcher();
         this.bufferBuilders = mc.getBufferBuilders();
 
-        this.renderChunkFactory = new RenderChunkFactoryVbo();
+        this.renderChunkFactory = ChunkRendererSchematicVbo::new;
 
         this.blockRenderManager = MinecraftClient.getInstance().getBlockRenderManager();
         this.blockModelRenderer = new BlockModelRendererSchematic(mc.getBlockColors());
@@ -593,6 +593,11 @@ public class WorldRendererSchematic
 
     public BakedModel getModelForState(BlockState state)
     {
+        if (state.getRenderType() == BlockRenderType.ENTITYBLOCK_ANIMATED)
+        {
+            return this.blockRenderManager.getModels().getModelManager().getMissingModel();
+        }
+
         return this.blockRenderManager.getModel(state);
     }
 

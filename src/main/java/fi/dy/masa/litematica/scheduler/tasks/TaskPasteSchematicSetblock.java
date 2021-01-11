@@ -3,12 +3,13 @@ package fi.dy.masa.litematica.scheduler.tasks;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Locale;
 import java.util.Set;
 import com.google.common.collect.ArrayListMultimap;
 import net.minecraft.block.BlockState;
 import net.minecraft.client.network.ClientPlayerEntity;
 import net.minecraft.client.world.ClientWorld;
-import net.minecraft.command.arguments.BlockArgumentParser;
+import net.minecraft.command.argument.BlockArgumentParser;
 import net.minecraft.entity.Entity;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.ChunkPos;
@@ -73,9 +74,7 @@ public class TaskPasteSchematicSetblock extends TaskBase implements IInfoHudRend
     @Override
     public boolean canExecute()
     {
-        // Only use this command-based task in multiplayer
-        return this.boxesInChunks.isEmpty() == false && this.mc.world != null &&
-               this.mc.player != null && this.mc.isIntegratedServerRunning() == false;
+        return this.boxesInChunks.isEmpty() == false && this.mc.world != null && this.mc.player != null;
     }
 
     @Override
@@ -257,7 +256,7 @@ public class TaskPasteSchematicSetblock extends TaskBase implements IInfoHudRend
     private void summonEntities(IntBoundingBox box, WorldSchematic worldSchematic, ClientPlayerEntity player)
     {
         net.minecraft.util.math.Box bb = new net.minecraft.util.math.Box(box.minX, box.minY, box.minZ, box.maxX + 1, box.maxY + 1, box.maxZ + 1);
-        List<Entity> entities = worldSchematic.getEntities((Entity) null, bb, null);
+        List<Entity> entities = worldSchematic.getOtherEntities(null, bb, null);
 
         for (Entity entity : entities)
         {
@@ -271,7 +270,7 @@ public class TaskPasteSchematicSetblock extends TaskBase implements IInfoHudRend
                 String nbtString = nbt.toString();
                 */
 
-                String strCommand = String.format("/summon %s %f %f %f", id, entity.getX(), entity.getY(), entity.getZ());
+                String strCommand = String.format(Locale.ROOT, "/summon %s %f %f %f", id, entity.getX(), entity.getY(), entity.getZ());
                 /*
                 String strCommand = String.format("/summon %s %f %f %f %s", entityName, entity.posX, entity.posY, entity.posZ, nbtString);
                 System.out.printf("entity: %s\n", entity);
